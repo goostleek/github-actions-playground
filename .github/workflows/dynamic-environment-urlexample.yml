@@ -1,0 +1,23 @@
+name: Dynamic Environment Url Example
+
+on:
+  workflow_dispatch:
+    inputs:
+      engine:
+        type: choice
+        description: Please select the option
+        options:
+        - Google
+        - DuckDuckGo
+env:
+    Google: "https://duckduckgo.com/"
+    DuckDuckGo: "https://google.com"
+
+jobs:
+  build:
+    runs-on: windows-latest
+    environment:
+      name: Search Engine
+      url: ${{ env[inputs.engine] }}
+    steps:
+      - run: echo "You selected $ {{ env[inputs.engine] }}"
