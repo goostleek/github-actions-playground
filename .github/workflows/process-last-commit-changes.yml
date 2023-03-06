@@ -9,7 +9,7 @@ jobs:
           fetch-depth: 2
       - name: Process files changed in the current commit
         run: |
-          changedFiles=$(git diff --name-only $GITHUB_SHA^)
+          changedFiles=$(git diff --name-only $GITHUB_HEAD_REF^)
           for file in $changedFiles; do
             echo "Processing file: $file"
           done
