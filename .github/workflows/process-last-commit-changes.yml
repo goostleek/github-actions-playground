@@ -6,7 +6,7 @@ jobs:
       - name: Checkout (fetch last two commits)
         uses: actions/checkout@v3
         with:
-          fetch-depth: 3
+          fetch-depth: 2
       - name: debug
         run: |
           git log --oneline
@@ -20,7 +20,7 @@ jobs:
           echo "GITHUB_BASE_REF: $GITHUB_BASE_REF"
       - name: Process files changed in the current commit
         run: |
-          changedFiles=$(git diff --name-only $GITHUB_REF^)
+          changedFiles=$(git diff --name-only $GITHUB_HEAD_REF $GITHUB_HEAD_REF^)
           for file in $changedFiles; do
             echo "Processing file: $file"
           done
