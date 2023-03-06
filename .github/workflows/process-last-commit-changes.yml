@@ -3,7 +3,7 @@ jobs:
   process-last-commit-changes:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout (fetch last two commits)
+      - name: Checkout (fetch last two commits) of the PR
         uses: actions/checkout@v3
         with:
           ref: ${{ github.event.pull_request.head.sha }}
