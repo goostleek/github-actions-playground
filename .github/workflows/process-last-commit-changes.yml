@@ -8,20 +8,9 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.sha }}
           fetch-depth: 2
-      - name: debug
-        run: |
-          git log --oneline
-          echo "GITHUB_REF: $GITHUB_REF"
-          echo "GITHUB_SHA: $GITHUB_SHA"
-          echo "GITHUB_HEAD_REF: $GITHUB_HEAD_REF"
-          echo "GITHUB_BASE_REF: $GITHUB_BASE_REF"
-          echo "GITHUB_SHA: $GITHUB_SHA"
-          echo "GITHUB_REF: $GITHUB_REF"
-          echo "GITHUB_HEAD_REF: $GITHUB_HEAD_REF"
-          echo "GITHUB_BASE_REF: $GITHUB_BASE_REF"
       - name: Process files changed in the current commit
         run: |
-          changedFiles=$(git diff --name-only $GITHUB_HEAD_REF $GITHUB_HEAD_REF^)
+          changedFiles=$(git diff --name-only HEAD^)
           for file in $changedFiles; do
             echo "Processing file: $file"
           done
