@@ -1,0 +1,23 @@
+name: Cache current commit SHA
+
+on:
+  - push
+  - workflow_dispatch
+jobs:
+  cache-commit-sha:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/cache@v3
+        with:
+          path: commit-sha
+          key: commit-store-${{ github.sha }}
+          restore-keys: commit-store-
+      - name: Read cached commit SHA
+        run: |
+          touch commit-sha
+          echo Cached SHA: $(cat commit-sha)
+      - name: Save current commit SHA
+        run: |
+          echo ${{ github.sha }} > commit-sha
+          echo Current SHA: $(cat commit-sha)
